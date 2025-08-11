@@ -32,36 +32,38 @@ The project is organized into a standard data science structure to ensure clarit
 ```
 
 ---
+## Data Collection
+The raw data for this project was collected via a custom web scraper built with Python and the Selenium library. The scraper was designed to gather job postings from Adzuna and Glassdoor based on a predefined set of keywords. The raw, scraped output from this process is stored in the `/data/raw/ directory`. Note: The scraper script itself is not included in this repository, as the primary focus is on the reproducible analytical pipeline that begins with the raw data files.
+---
 
 ## The Analytical Pipeline
 
 The analysis is conducted in a series of Jupyter Notebooks, which are designed to be run in numerical order.
 
-**1. `GD_JobsScraper_BSoup_FullJobDesc.ipynb`** UPDATE NAME
-* **Input:** Raw .html data scraped from `Glassdoor.com` and `Adzuna.com`
-* **Process:** 
-* **Output:** Scraped web data saved to `/data/raw_data/`.
-
-**2. `SkillsBuild_webscraper.ipynb`** UPDATE NAME
-* **Input:** Raw .html data scraped from `skillsbuild.org`
-* **Process:** 
-* **Output:** `....csv` saved to `/data/processed/`.
-
-**3. `adzuna_gd_jl_clean_append_final.ipynb`** UPDATE NAME
-* **Input:** Raw scraped CSV files from `/data/raw_data/`.
+**1. `01_data_cleaning_and_filtering.ipynb`**
+* **Input:** Raw scraped CSV files from `/data/raw/`.
 * **Process:** Merges all raw files, applies a two-layer keyword filter to isolate relevant data science and economics roles, and performs initial cleaning on location and salary data.
-* **Output:** `master_cleaned_job_listings_final_v2.csv` saved to `/data/processed_data/`.
+* **Output:** `master_focused_job_listings.csv` saved to `/data/processed/`.
 
-**4. `Data Feature Engineering & PCA_kmeans_V2.ipynb`**
-* **Input:** `master_cleaned_job_listings_final_v2.csv`.
+**2. `02_feature_engineering_and_pca.ipynb`**
+* **Input:** `master_focused_job_listings.csv`.
 * **Process:**
     * Performs K-Means clustering on the one-hot encoded skill matrix to identify 7 core job archetypes.
     * Applies Principal Component Analysis (PCA) to the skill matrix to create uncorrelated "Super-Skill" components.
     * Creates and adds the `seniority` control variable.
     * Assembles the final datasets for analysis and modeling.
 * **Outputs:**
-    * `full_analysis_dataset.csv` (for descriptive analysis and visualizations).
+    * `full_analysis_dataset.csv` (for descriptive analysis and visualisations).
     * `final_regression_dataset.csv` (the lean, numerical dataset for modeling).
+
+**3. `03_regression_and_analysis.ipynb`**
+* **Input:** `final_regression_dataset.csv`.
+* **Process:**
+    * Builds and evaluates the primary OLS regression model to quantify the salary impact of Super-Skills, archetypes, regions, and seniority.
+    * Builds and evaluates benchmark models (KNN, Random Forest) for validation.
+    * Generates the key charts and tables for the final dissertation.
+* **Output:** All final visualisations saved to the `/outputs/figures/` directory.
+
  
 **5. `[pengjin's_archetype analysis.ipynb]`**
 * **Input:** `full_analysis_dataset.csv`.
@@ -69,14 +71,6 @@ The analysis is conducted in a series of Jupyter Notebooks, which are designed t
     * ....
 * **Outputs:**
     * `....` (for descriptive analysis and visualizations).
-
-**6. `IBM Regression Analysis_V3.ipynb`**
-* **Input:** `final_modelling_dataset.csv`.
-* **Process:**
-    * Builds and evaluates the primary OLS regression model to quantify the salary impact of Super-Skills, archetypes, regions, and seniority.
-    * Builds and evaluates benchmark models (KNN, Random Forest) for validation.
-    * Generates the key charts and tables for the final dissertation.
-* **Output:** All final visualisations saved to the `/outputs/figures/` directory.
 
 **7. `[skillbuild analysis].ipynb`**
 * **Input:** `...`.
