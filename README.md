@@ -1,4 +1,4 @@
-# IBM 1 Dissertation Project: A Data-Driven Skills Strategy for IBM
+# IBM 1 Dissertation Project: *A Data-Driven Skills Strategy for IBM*
 
 ##  Project Overview
 
