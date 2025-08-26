@@ -2,10 +2,12 @@
 
 ##  Project Overview
 
-This repository contains the full codebase and analytical pipeline for the MSc Economics with Data Science dissertation, "Future-Proofing the UK Workforce: A Data-Driven Skills Strategy for IBM". The project analyses over 4,500 UK job postings to identify key job archetypes, quantify the economic value of specific skill sets, and provide strategic recommendations for IBM's SkillsBuild program.
+This repository contains the full codebase and analytical pipeline for the MSc Economics with Data Science dissertation, "Future-Proofing the UK Workforce: A Data-Driven Skills Strategy for IBM". The project confronts the dual challenge of AI-driven disruption in the UK labour market: the contraction of entry-level roles and the simultaneous emergence of a significant salary premium for high-value data skills.
 
 Our core research question is: 
 <code style="color: aqua">***How can IBM use its SkillsBuild platform to target future economics & data science skill gaps, focusing on different demographics and regions?***</code>
+
+To answer this, we developed an integrated supply-demand framework. On the demand side, we analysed over 4,500 UK job postings, using K-Means clustering to identify seven core Job Archetypes and Principal Component Analysis (PCA) to create twelve "Super-Skill" components. A semi-log OLS model was then used to quantify the economic value of these roles and skills. On the supply side, we analysed the IBM SkillsBuild curriculum to map its offerings against our data-driven findings. The final output is a set of specific, actionable recommendations for IBM to enhance its platform and better meet the evolving needs of the UK workforce.
 
 ---
 
