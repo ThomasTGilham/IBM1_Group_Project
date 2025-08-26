@@ -120,7 +120,7 @@ The analysis is conducted in a series of Jupyter Notebooks, which are designed t
 
 ### Execution
 
-To reproduce the full analysis, run the Jupyter Notebooks in the `/notebooks/` directory in numerical order. Ensure your raw data files are placed in the `/data/raw/` directory before starting.
+To reproduce the full analysis, run the Jupyter Notebooks in the `/notebooks/` directory in numerical order. Ensure raw data files are placed in the `/data/raw/` directory before starting.
 
 ---
 
