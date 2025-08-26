@@ -21,7 +21,7 @@ The project is organized into a standard data science structure to ensure clarit
 |   |-- 📂 processed/       # Cleaned and engineered datasets
 |   |-- 📂 external/        # External data (e.g., ONS population stats)
 |
-|-- 📂 notebooks/           # Our Jupyter Notebooks with commentary and methodology rationales
+|-- 📂 notebooks/           # Our Notebooks with commentary & methodology rationales
 |
 |-- 📂 outputs/             # All final outputs from the analysis
 |   |-- 📂 figures/         # Final charts and plots (.png)
@@ -43,12 +43,12 @@ and the Selenium library. The scraper was designed to gather job postings from A
 
 The analysis is conducted in a series of Jupyter Notebooks, which are designed to be run in numerical order.
 
-**1. `01_data_cleaning_and_filtering.ipynb`**
+### **1. `01_data_cleaning_and_filtering.ipynb`**
 * **Input:** Raw scraped CSV files from `/data/raw/`.
-* **Process:** Merges all raw files, applies a two-layer keyword filter to isolate relevant data science and economics roles, and performs initial cleaning on location and salary data.
-* **Output:** `master_cleaned_job_listings_final_v2.csv` saved to `/data/processed/`.
+* **Process:** Merges all raw files, performs a multi-tiered imputation for missing salary and date data, and applies a two-layer keyword filter to isolate relevant data science and economics roles.
+* **Output:** `master_cleaned_job_listings_final_v2.csv` saved to `/data/processed/joblisting_processed_data`.
 
-**2. `02_feature_engineering_and_pca.ipynb`**
+### **2. `02_feature_engineering_and_pca.ipynb`**
 * **Input:** `master_cleaned_job_listings_final_v2.csv`.
 * **Process:**
     * Performs K-Means clustering on the one-hot encoded skill matrix to identify 7 core job archetypes.
@@ -57,32 +57,39 @@ The analysis is conducted in a series of Jupyter Notebooks, which are designed t
     * Assembles the final datasets for analysis and modeling.
 * **Outputs:**
     * `master_enriched_job_listings_dataset.csv` (for descriptive analysis and visualisations).
-    * `final_modelling_dataset.csv` (the lean, numerical dataset for modeling).
+    * `final_modelling_dataset_WITH_NOISE.csv` and `final_modelling_dataset_NO_NOISE.csv`(the numerical datasets for regression).
 
-**3. `03_regression_and_analysis.ipynb`**
+### **3. `03_regression_and_analysis.ipynb`**
 * **Input:** `final_modelling_dataset.csv`.
 * **Process:**
-    * Builds and evaluates the primary OLS regression model to quantify the salary impact of Super-Skills, archetypes, regions, and seniority.
+    * Systematically runs and compares four different OLS regression models to ensure robustness:
+       * Model A: With "Noise" cluster, full data.
+       * Model B: With "Noise" cluster, sensitivity analysis (non-imputed salary).
+       * Model C: No "Noise" cluster, full data (the final, preferred model).
+       * Model D: No "Noise" cluster, sensitivity analysis.
+    * Builds and evaluates the primary semi-log OLS model (Model C) to quantify the salary impact of Super-Skills, archetypes, regions, and seniority.
     * Builds and evaluates benchmark models (KNN, Random Forest) for validation.
     * Generates the key charts and tables for the final dissertation.
 * **Output:** All final visualisations saved to the `/outputs/figures/` directory.
 
-**4. `[pengjin's_archetype analysis.ipynb]`**
+### **4. `04_archetype_analysis.ipynb`**
 * **Input:** `master_enriched_job_listings_dataset.csv`.
-* **Process:**
-    * ....
-* **Outputs:**
-    * `....` (for descriptive analysis and visualizations).
+* **Process:** Conducts a deep-dive descriptive analysis into the seven core job archetypes. This includes profiling their top technical skills, soft skills, "Super-Skill" compositions (via heatmaps and radar charts), and salary distributions (via violin plots)
+* **Outputs:** All archetype profile visualisations saved to /outputs/figures/.
 
-**5. `04_IBM_skills_gap_analysis.ipynb`**
-* **Input:** `skillsbuild_courses_cleaned.csv` from `/data/raw/` and `full_analysis_dataset.csv` from `/data/processed/`.
-* **Process:**
-    * Ingests and cleans the raw IBM SkillsBuild course data.
-    * Tags each course with the same granular skill lexicon and "Super-Skill" components used in the job market analysis to ensure a direct comparison.
-    * Merges the "supply" data (IBM courses) with the "demand" data (job market analysis) to calculate the skills gap.
-* **Output:** The final Skills Gap Matrix and strategic bubble charts saved to the `/outputs/figures/` directory.
----
+### **5. `05_regional_analysis.ipynb` & `05.1_region_interactive_maps.ipynb`**
+* **Input:** `master_enriched_job_listings_dataset.csv` and external ONS population data
+* **Process:** Performs the geographic analysis of the UK job market. This includes creating the per-capita job archetype maps and the regional salary heatmaps to identify local skill hotspots and economic disparities.
+* **Output:** All regional charts and maps saved to /outputs/figures/
 
+### **6. `06_IBM_skills_gap_analysis.ipynb`**
+* **Input:** `skillsbuild_courses_cleaned.csv` from /data/raw/ and `master_enriched_job_listings_dataset.csv` from /data/processed/
+* **Process:**
+   * Ingests and cleans the raw IBM SkillsBuild course data.
+   * Tags each course with the same granular skill lexicon and "Super-Skill" components used in the job market analysis.
+   * Merges the "supply" data (IBM courses) with the "demand" data (job market) to calculate the skills gap.
+
+* **Output:** The final Skills Gap Matrix and strategic bubble charts saved to /outputs/figures/
 ---
 
 ## How to Run This Project
@@ -124,4 +131,5 @@ To reproduce the full analysis, run the Jupyter Notebooks in the `/notebooks/` d
 * **Machine Learning:** scikit-learn (KMeans, PCA, LinearRegression, RandomForestRegressor, etc.)
 * **Statistical Modeling:** statsmodels (for OLS regression summary)
 * **NLP:** spaCy
-* **Visualisation:** matplotlib, seaborn
+* **Visualisation:** matplotlib, seaborn, folium (for interactive maps)
+* **Table Generation:** stargazer (for final regression tables), dataframe_image
