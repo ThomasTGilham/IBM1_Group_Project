@@ -11,7 +11,7 @@ Our core research question is:
 
 ## Folder Structure
 
-The project is organized into a standard data science structure to ensure clarity and reproducibility:
+The project is organised into a standard data science structure to ensure clarity and reproducibility:
 
 ```
 /dissertation_project/
