@@ -1,0 +1,83 @@
+,Unnamed: 1,Unnamed: 2
+,Dependent variable: median_annual_salary_gbp,Dependent variable: median_annual_salary_gbp
+,,
+,Model C (Main),Model D (Sensitivity)
+,(1),(2)
+,,
+kmeans_job_archetype_Cloud & Data Engineer,0.201***,0.349***
+,(0.028),(0.049)
+kmeans_job_archetype_Machine Learning & AI Specialist,0.203***,0.257***
+,(0.024),(0.038)
+kmeans_job_archetype_AI Strategist,0.219***,0.291***
+,(0.027),(0.041)
+kmeans_job_archetype_Classic Data Scientist (Stats & Modeling Focus),0.149***,0.210***
+,(0.031),(0.060)
+kmeans_job_archetype_SQL Developer,0.127***,0.230***
+,(0.022),(0.039)
+kmeans_job_archetype_BI Visualization Specialist (Power BI Focus),0.090***,0.143***
+,(0.025),(0.041)
+SuperSkill_Basic_Data_Science,0.032,0.054
+,(0.023),(0.045)
+SuperSkill_BI_DataViz,-0.014,-0.008
+,(0.024),(0.037)
+SuperSkill_Statistical_Analysis_Reporting,0.020,0.062
+,(0.028),(0.047)
+SuperSkill_Cloud-Enabled_AI_BI,0.017,0.044
+,(0.048),(0.087)
+SuperSkill_SQL_Analytics_&_Automation,-0.023,-0.095
+,(0.052),(0.088)
+SuperSkill_AI_Cloud_Excel,-0.087,-0.211
+,(0.096),(0.178)
+SuperSkill_Cloud_Augmented_Analysis,0.018,0.092
+,(0.075),(0.117)
+SuperSkill_Cloud_Analytics_Econometrics,-0.028,-0.045
+,(0.064),(0.137)
+SuperSkill_Python_Data_Products,0.037,-0.234*
+,(0.060),(0.132)
+SuperSkill_Cloud_Engineering_MLOps,0.177,0.247
+,(0.136),(0.178)
+SuperSkill_Analytics_Engineering_&_MLOps,-0.111*,-0.054
+,(0.064),(0.101)
+SuperSkill_R_StatScience_&_BI,0.041,0.313
+,(0.102),(0.210)
+seniority_Manager/Director,0.405***,0.582***
+,(0.036),(0.060)
+seniority_Senior,0.382***,0.512***
+,(0.030),(0.049)
+seniority_Mid-Level,0.278***,0.390***
+,(0.028),(0.046)
+region_London,0.176***,0.206***
+,(0.034),(0.055)
+region_Remote,0.061,0.029
+,(0.041),(0.065)
+region_Scotland,0.100**,0.063
+,(0.046),(0.076)
+region_South East (England),0.049,0.034
+,(0.038),(0.063)
+region_East of England,0.061,0.027
+,(0.041),(0.068)
+region_North West (England),0.012,-0.075
+,(0.041),(0.066)
+region_South West (England),0.051,0.004
+,(0.044),(0.068)
+region_East Midlands (England),0.033,-0.037
+,(0.048),(0.077)
+region_Yorkshire and The Humber,0.020,-0.074
+,(0.052),(0.084)
+region_North East (England),0.052,-0.022
+,(0.062),(0.103)
+region_Wales,-0.088,-0.083
+,(0.071),(0.111)
+region_Northern Ireland,0.006,-0.247**
+,(0.071),(0.119)
+Observations,2225,1196
+R2,0.205,0.293
+Adjusted R2,0.193,0.273
+Residual Std. Error,0.302 (df=2191),0.352 (df=1162)
+F Statistic,17.147*** (df=33; 2191),14.582*** (df=33; 1162)
+,,
+Note:,*p<0.1; **p<0.05; ***p<0.01,*p<0.1; **p<0.05; ***p<0.01
+"Significance: *** p < 0.001, ** p < 0.01, * p < 0.05.","Significance: *** p < 0.001, ** p < 0.01, * p < 0.05.","Significance: *** p < 0.001, ** p < 0.01, * p < 0.05."
+Dependent variable is Log(Median Annual Salary).,Dependent variable is Log(Median Annual Salary).,Dependent variable is Log(Median Annual Salary).
+"Base categories: ""Traditional Analyst"", ""West Midlands"", ""Junior"".","Base categories: ""Traditional Analyst"", ""West Midlands"", ""Junior"".","Base categories: ""Traditional Analyst"", ""West Midlands"", ""Junior""."
+Model includes a full set of regional and Super-Skill controls.,Model includes a full set of regional and Super-Skill controls.,Model includes a full set of regional and Super-Skill controls.
