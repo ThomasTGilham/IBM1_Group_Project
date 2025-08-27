@@ -37,7 +37,7 @@ The project is organised into a standard data science structure to ensure clarit
 ## Data Collection 
 
 The raw data for this project was collected via a custom web scraper built with Python 
-and the Selenium library. The scraper was designed to gather job postings from Adzuna and Glassdoor based on a predefined set of keywords. The raw, scraped output from this process is stored in the `/data/raw/ directory`. Note: The scraper script itself is not included in this repository, as the primary focus is on the reproducible analytical pipeline that begins with the raw data files.
+and the Selenium library. The scraper was designed to gather job postings from Adzuna and Glassdoor based on a predefined set of keywords. The raw, scraped outputs from this process is stored withinin `/data/raw/`.
 
 ---
 
@@ -48,7 +48,7 @@ The analysis is conducted in a series of Jupyter Notebooks, which are designed t
 ### **1. `01_data_cleaning_and_filtering.ipynb`**
 * **Input:** Raw scraped CSV files from `/data/raw/`.
 * **Process:** Merges all raw files, performs a multi-tiered imputation for missing salary and date data, and applies a two-layer keyword filter to isolate relevant data science and economics roles.
-* **Output:** `master_cleaned_job_listings_final_v2.csv` saved to `/data/processed/joblisting_processed_data`.
+* **Output:** `master_cleaned_job_listings_final_v2.csv` saved to `/data/raw`.
 
 ### **2. `02_feature_engineering_and_pca.ipynb`**
 * **Input:** `master_cleaned_job_listings_final_v2.csv`.
@@ -58,8 +58,9 @@ The analysis is conducted in a series of Jupyter Notebooks, which are designed t
     * Creates and adds the `seniority` control variable.
     * Assembles the final datasets for analysis and modeling.
 * **Outputs:**
-    * `master_enriched_job_listings_dataset.csv` (for descriptive analysis and visualisations).
+    * `master_enriched_job_listings_dataset_WITH_NOISE.csv` and `master_enriched_job_listings_dataset_NO_NOISE.csv` (for descriptive analysis and visualisations).
     * `final_modelling_dataset_WITH_NOISE.csv` and `final_modelling_dataset_NO_NOISE.csv`(the numerical datasets for regression).
+    * Both saved to `/data/processed` 
 
 ### **3. `03_regression_and_analysis.ipynb`**
 * **Input:** `final_modelling_dataset.csv`.
@@ -77,15 +78,15 @@ The analysis is conducted in a series of Jupyter Notebooks, which are designed t
 ### **4. `04_archetype_analysis.ipynb`**
 * **Input:** `master_enriched_job_listings_dataset.csv`.
 * **Process:** Conducts a deep-dive descriptive analysis into the seven core job archetypes. This includes profiling their top technical skills, soft skills, "Super-Skill" compositions (via heatmaps and radar charts), and salary distributions (via violin plots)
-* **Outputs:** All archetype profile visualisations saved to /outputs/figures/.
+* **Outputs:** All archetype profile visualisations saved to `/outputs/figures/`.
 
 ### **5. `05_regional_analysis.ipynb` & `05.1_region_interactive_maps.ipynb`**
 * **Input:** `master_enriched_job_listings_dataset.csv` and external ONS population data
 * **Process:** Performs the geographic analysis of the UK job market. This includes creating the per-capita job archetype maps and the regional salary heatmaps to identify local skill hotspots and economic disparities.
-* **Output:** All regional charts and maps saved to /outputs/figures/
+* **Output:** All regional charts and maps saved to `/outputs/figures/`
 
 ### **6. `06_IBM_skills_gap_analysis.ipynb`**
-* **Input:** `skillsbuild_courses_cleaned.csv` from /data/raw/ and `master_enriched_job_listings_dataset.csv` from /data/processed/
+* **Input:** `skillsbuild_courses_cleaned.csv` from `/data/raw/` and `master_enriched_job_listings_dataset.csv` from `/data/processed/`
 * **Process:**
    * Ingests and cleans the raw IBM SkillsBuild course data.
    * Tags each course with the same granular skill lexicon and "Super-Skill" components used in the job market analysis.
