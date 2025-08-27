@@ -1,0 +1,29 @@
+# This file lists the Python packages required to run the analysis for our dissertation.
+# all of these packages can be installed by running the following command in terminal:
+# pip install -r requirements.txt
+# --- Core Data Science Libraries ---
+pandas
+numpy
+scikit-learn
+statsmodels
+
+# --- Natural Language Processing ---
+spacy
+
+# --- Web Scraping ---
+selenium
+
+# --- Visualization ---
+matplotlib
+seaborn
+folium
+
+# --- Table Generation & Output ---
+stargazer-py
+dataframe_image
+
+# --- Notebook Environment ---
+# jupyterlab
+# notebook
+
+===========================================================================
